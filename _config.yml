@@ -1,6 +1,7 @@
 # build
 markdown: kramdown
 permalink: /blog/:year/:title/
+baseurl: ""
 exclude:
   - CNAME
   - Gemfile
