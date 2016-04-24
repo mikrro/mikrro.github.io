@@ -24,8 +24,8 @@ compress_html:
     envs: [travis]
 # theme
 noita:
-  name: Paulina's Xen Blog
-  description: About virtualization with Xen and QEMU. 
+  name: Paulina's Virtualization Blog
+  description: 
   author:
     name: Paulina Szubarczyk
   lang: en
