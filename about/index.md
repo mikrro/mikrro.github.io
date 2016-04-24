@@ -4,7 +4,9 @@ title: About
 ---
 
 ## Content
-I am going to include here information I gather during the work on the project: [QEMU xen-blkback performance analysis and improvements][0].  The project was proposed as Outreachy Program Project, but I work on it outside the program. The author of the project proposal is Roger Pau Monné <roger.pau@citrix.com>. And the following description and outcomes come from the project page.
+I am going to include here information I gather during the work on the project:  
+[QEMU xen-blkback performance analysis and improvements][0].
+The project was proposed as Outreachy Program Project, but I work on it outside the program. The author of the project proposal is Roger Pau Monné <roger.pau@citrix.com>. And the following description and outcomes come from the project page.
 
 ### Description:
 The current xen-blkback implementation inside of QEMU is lacking several features found in the in-kernel Linux xen-blkback implementation. The goal of the project is to analyze the bottlenecks currently found in QEMU, and provide solutions in order to reduce them. Some of them might involve:
