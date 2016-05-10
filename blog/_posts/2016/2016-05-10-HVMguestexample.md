@@ -9,7 +9,7 @@ robots: none
 
 Hardware Virtual Machine - HVM - guest is an unmodified machine, the code of the system does not need to be changed to work under Xen. It requires a [hardware support](../HWsupport/index.md) from the machine. Because this kind of guest unlikely implements [split device drivers](../XenDeviceModel/index.md) Xen emulates the hardware by [QEMU](../Xen-QEMU/index.md). A HVM guest has an emulated BIOS and boots in the real mode. It is possible to access a Xen's hypercall page by special instrucations and issue the hypercalls in the same way as a PV guests. 
 
-## Sample configuration file 
+### Sample configuration file 
 
 >##### Kernel 
 builder = 'hvm'  
