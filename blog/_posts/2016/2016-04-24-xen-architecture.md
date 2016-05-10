@@ -23,7 +23,7 @@ To run Xen the priviledged domain, refered as domain 0, must exists on top of it
 
 ### Domain 0 
  
-Domain 0, refered as a host domain, is priviledged domain, it may access the hardware directly and run Xen control tools to manage other domains.
+Domain 0, referred as a host domain, is a priviledged domain, it may access the hardware directly and run the Xen control tools to manage other domains. 
 
 
 ### Unpriviledged domain
