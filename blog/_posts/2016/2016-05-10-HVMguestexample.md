@@ -7,7 +7,7 @@ robots: none
 
 ## Hardware Virtual Machine guest
 
-Hardware Virtual Machine - HVM - guest is an unmodified machine, the code of the system does not need to be changed to work under Xen. It requires a [hardware support](../HWsupport/index.md) from the machine. Because this kind of guest unlikely implements [split device drivers](../XenDeviceModel/index.md) Xen emulates the hardware by [QEMU](../Xen-QEMU/index.md). A HVM guest has an emulated BIOS and boots in the real mode. It is possible to access a Xen's hypercall page by special instrucations and issue the hypercalls in the same way as a PV guests. 
+Hardware Virtual Machine - HVM - guest is an unmodified machine, the code of the system does not need to be changed to work under Xen. It requires a [hardware support](../HWsupport/index.md) from the machine. Because this kind of guest unlikely implements [split device drivers](../XenDeviceModel/index.md) Xen emulates the hardware by [QEMU](../Xen-QEMU/index.md). A HVM guest has an emulated BIOS and boots in the real mode. It is possible to access a Xen's hypercall page by special instructions and issue the hypercalls in the same way as a PV guests. 
 
 ### Sample configuration file 
 
@@ -41,13 +41,13 @@ Explanation of each tag can be found [here](http://xenbits.xen.org/docs/unstable
 Following I explain some of the configuration used underneath.
 
 1. Kernel  
-When the guest is run first time it must be booted from a bootdisk. In my case it is a cd-rom with an image of openSUSE system. The boot option in this section should be accordingly set to cd-rom (boot = "d"). After completing the process of installation the system will restart and the boot option should be changed to a hard disk (boot = "c"). Reamining option is network/PXE (boot = "n").
+When the guest is run first time it must be booted from a bootdisk. In my case it is a cd-rom with an image of openSUSE system. The boot option in this section should be accordingly set to cd-rom (boot = "d"). After completing the process of installation the system will restart and the boot option should be changed to a hard disk (boot = "c"). Remaining option is network/PXE (boot = "n").
 
 2. Devices  
-There are three devices connected to the guest. A logical volume vg0, as a hard drive accessible from the guest as /dev/hdd, a cd-rom /dev/hdc and a usbdevice. A usb bus must be enabled (usb=1) for that option. Here the device is reffered by host:USBID which can be read by the lsusb tool, there are another way to reffer to it as described in the configuration manual.
+There are three devices connected to the guest. A logical volume vg0, as a hard drive accessible from the guest as /dev/hdd, a cd-rom /dev/hdc and a usbdevice. An usb bus must be enabled (usb=1) for that option. Here the device is referred by host:USBID which can be read by the lsusb tool, there are another way to refer to it as described in the configuration manual.
 
 3. Display  
-A virtual network connection is used to connect to a guest with GUI. I am using a vncviewer. Alhough it demands restart during changes of the guest resolution it automatically adjusts to it in contrast to a gncviewer - it is probably configurable, but I did not find a clear explanation how to achive rescalling on the gncviewer.
+A virtual network connection is used to connect to a guest with GUI. I am using a vncviewer. Although it demands restart during changes of the guest resolution it automatically adjusts to it in contrast to a gncviewer - it is probably configurable, but I did not find a clear explanation how to achieve rescaling on the gncviewer.
 
 4. Networking  
 The main option here is the bridge name. Following is a guide how I managed to set up the network connection via wlan0 interface.  
