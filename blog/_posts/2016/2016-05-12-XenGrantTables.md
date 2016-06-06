@@ -30,9 +30,16 @@ The operation is processed on a local copy of the `struct gnttab_setup_table`. A
 
 The operation is called during starting the domain via *xl create*. It makes a call to a *libxc* library's `xc_dom_gnttab_seed` function taking care of setup the grant table for guests.
 
+#### Grant map
+
+The grant map operation allows to grant an access to a page owned by one page for another. It requires mapping the page to the new domain virtual address space and unmapping it on the completion of the operation on the page. The structure `struct gnttab_map_grant_ref` wraps the operation. 
+...
+
+During those operations virtual addresses are rewritten back and forth. The drawback of that is that the addresses must be removed from cached to avoid access to the stale addresses. The leads to TLB (Translation Lookaside Buffer) shootdown - flushing the TLB caches of related CPUs - and discarding cached virtual addresses of an operated on grant in vCPUs assigned to guests domains. TLB is a cache to store a mapping between virtual and physical addresses. Both of those operation are costly.
+
 #### Grant copy
 
-The operation passed as `struct gnttab_copy` stores the data of a source and a destination and a length of data to copy. Buffers `struct gnttab_copy_buf` are used to perform the operation. First the domains are locked and buffers are prepared. For a source domain a `__acquire_grant_for_copy` function is called and for a destination domain a `__get_paged_frame`. They fill a bufffers' page and frame, acquiring the page from domain or translating the destination page frame number to a machine frame number. Boundaries of the mapped region to copy are checked and memory is copied  
+The grant copy operation is a hypervisor driven operation where the data are memcopied between domains. It is wrapped in `struct gnttab_copy` that stores the data of a source and a destination and a length of data to copy. Among the source and destination information there must be grant reference to the requesting domain page and virtual address where the data to operate on are or will be stored. To perform the operation buffers `struct gnttab_copy_buf` are used that expand the information of grant references and virtual addresses by a page information, a physical frame number and virtual addresses. Before performing the copy domains are locked. For a source domain a `__acquire_grant_for_copy` function is called and for a destination domain a `__get_paged_frame`. They fill the bufffers' page info and frame, acquiring the page from domain or translating the destination page frame number to a machine frame number. Boundaries of the mapped region to copy are checked and memory is copied  
 
 ```
 memcpy(dest->virt + op->dest.offset,   
