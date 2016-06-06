@@ -35,7 +35,7 @@ The operation is called during starting the domain via *xl create*. It makes a c
 The grant map operation allows to grant an access to a page owned by one page for another. It requires mapping the page to the new domain virtual address space and unmapping it on the completion of the operation on the page. The structure `struct gnttab_map_grant_ref` wraps the operation. 
 ...
 
-During those operations virtual addresses are rewritten back and forth. The drawback of that is that the addresses must be removed from cached to avoid access to the stale addresses. The leads to TLB (Translation Lookaside Buffer) shootdown - flushing the TLB caches of related CPUs - and discarding cached virtual addresses of an operated on grant in vCPUs assigned to guests domains. TLB is a cache to store a mapping between virtual and physical addresses. Both of those operation are costly.
+During those operations virtual addresses are rewritten back and forth. The drawback of that is that the addresses must be removed from cached to avoid access to the stale addresses. That leads to TLB (Translation Lookaside Buffer) shootdown - flushing the TLB caches of related CPUs - and discarding cached virtual addresses of an operated on grant in vCPUs assigned to guests domains. Where TLB is a cache to store a mapping between virtual and physical addresses. Both of those operation are costly.
 
 #### Grant copy
 
